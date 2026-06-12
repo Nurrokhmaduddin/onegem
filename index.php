@@ -150,7 +150,11 @@ $routes = [
     '/ajax/diamond/lookup'   => __DIR__ . '/master/diamond/ajax/lookup.php',
     '/ajax/diamond/stats'    => __DIR__ . '/master/diamond/ajax/stats.php',
 ];
-
+echo '<pre>';
+echo 'REQUEST_URI = ' . $_SERVER['REQUEST_URI'] . PHP_EOL;
+echo 'BASE_FOLDER = ' . BASE_FOLDER . PHP_EOL;
+echo 'PATH = ' . $path . PHP_EOL;
+exit;
 // ─── Dispatch ─────────────────────────────────────────────────────────────────
 if (isset($routes[$path])) {
     $file = $routes[$path];
