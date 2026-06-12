@@ -50,11 +50,11 @@ if ($path !== '/' && str_ends_with($path, '/')) {
 if ($path === '/') {
     redirect(url('auth/login'));
 }
-echo '<pre>';
-echo 'REQUEST_URI = ' . $_SERVER['REQUEST_URI'] . PHP_EOL;
-echo 'BASE_FOLDER = ' . BASE_FOLDER . PHP_EOL;
-echo 'PATH = ' . $path . PHP_EOL;
-exit;
+// echo '<pre>';
+// echo 'REQUEST_URI = ' . $_SERVER['REQUEST_URI'] . PHP_EOL;
+// echo 'BASE_FOLDER = ' . BASE_FOLDER . PHP_EOL;
+// echo 'PATH = ' . $path . PHP_EOL;
+// exit;
 // ─── Route map ────────────────────────────────────────────────────────────────
 $routes = [
     // Auth
