@@ -25,7 +25,7 @@ define('LOG_PATH',    BASE_PATH . '/logs');
 // ─── URL ──────────────────────────────────────────────────────────────────────
 // Nama folder project Anda di dalam www/ Laragon
 // Sesuaikan jika nama folder berbeda
-$folder_projek = 'onegem';
+$folder_projek = 'onegem.tmidev.my.id';
 
 $protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https' : 'http';
 $host     = $_SERVER['HTTP_HOST'] ?? 'localhost';
