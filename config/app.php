@@ -28,7 +28,7 @@ define('LOG_PATH',    BASE_PATH . '/logs');
 
 
 $protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https' : 'http';
-$host     = $_SERVER['HTTP_HOST'] ?? 'localhost';
+$host     = $_SERVER['HTTP_HOST'] ?? 'ujian.tmi-sqa.my.id';
 define('BASE_URL',    $protocol . '://' . $host );
 define('BASE_FOLDER', ''); // dipakai untuk routing
 
