@@ -14,7 +14,7 @@ define('APP_NAME',      'ONEGEM');
 define('APP_VERSION',   '1.0.0');
 define('APP_LOCALE',    'id_ID');
 define('APP_TIMEZONE',  'Asia/Jakarta');
-define('APP_ENV',       'production'); // development | production
+define('APP_ENV',       'development'); // development | production
 
 // ─── Path ─────────────────────────────────────────────────────────────────────
 define('BASE_PATH',   dirname(__DIR__));
@@ -25,19 +25,17 @@ define('LOG_PATH',    BASE_PATH . '/logs');
 // ─── URL ──────────────────────────────────────────────────────────────────────
 // Nama folder project Anda di dalam www/ Laragon
 // Sesuaikan jika nama folder berbeda
-// $folder_projek = 'onegem';
+$folder_projek = 'onegem';
 
 $protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https' : 'http';
-$host = $_SERVER['HTTP_HOST'] ?? 'onegem.tmi-sqa.my.id';
-
-// VPS / Domain langsung
-define('BASE_URL', $protocol . '://' . $host);
-define('BASE_FOLDER', '');
+$host     = $_SERVER['HTTP_HOST'] ?? 'localhost';
+define('BASE_URL',    $protocol . '://' . $host . '/' . $folder_projek);
+define('BASE_FOLDER', '/' . $folder_projek); // dipakai untuk routing
 
 // ─── Session ──────────────────────────────────────────────────────────────────
 define('SESSION_NAME',     'ERPSID');
 define('SESSION_LIFETIME', 28800);   // 8 jam
-define('SESSION_SECURE',   true);   // false untuk localhost (non-HTTPS)
+define('SESSION_SECURE',   false);   // false untuk localhost (non-HTTPS)
 // Start Session
 session_name(SESSION_NAME);
 
