@@ -27,10 +27,15 @@ define('LOG_PATH',    BASE_PATH . '/logs');
 // Sesuaikan jika nama folder berbeda
 // $folder_projek = 'onegem';
 
-$protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https' : 'http';
-$host     = $_SERVER['HTTP_HOST'] ?? 'localhost';
-define('BASE_URL',    $protocol . '://' . $host );
-define('BASE_FOLDER', '');// dipakai untuk routing
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+    ? 'https'
+    : 'http';
+
+$host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+
+// VPS / Domain langsung
+define('BASE_URL', $protocol . '://' . $host);
+define('BASE_FOLDER', '');
 
 // ─── Session ──────────────────────────────────────────────────────────────────
 define('SESSION_NAME',     'ERPSID');
