@@ -1,0 +1,35 @@
+Options -Indexes
+Options -MultiViews
+
+RewriteEngine On
+
+# Redirect semua request ke index.php (front controller)
+# Kecuali file/direktori yang benar-benar ada (css, js, img, uploads)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Keamanan: block akses langsung ke file sensitif
+<FilesMatch "\.(env|log|sql|sh|git)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Block akses ke folder config, shared, logs
+RewriteRule ^(config|shared|logs|sql)/.*$ - [F,L]
+
+# Security headers
+<IfModule mod_headers.c>
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-XSS-Protection "1; mode=block"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# PHP settings
+<IfModule mod_php.c>
+  php_value upload_max_filesize 10M
+  php_value post_max_size 12M
+  php_value max_execution_time 60
+  php_value memory_limit 128M
+</IfModule>

@@ -1,0 +1,3 @@
+[06-Jun-2026 11:15:51 Asia/Jakarta] Database connection failed: SQLSTATE[HY000] [1045] Access denied for user 'erp_user'@'localhost' (using password: YES)
+[06-Jun-2026 11:18:21 Asia/Jakarta] Database connection failed: SQLSTATE[HY000] [1045] Access denied for user 'erp_user'@'localhost' (using password: YES)
+[06-Jun-2026 11:18:24 Asia/Jakarta] Database connection failed: SQLSTATE[HY000] [1045] Access denied for user 'erp_user'@'localhost' (using password: YES)
