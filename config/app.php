@@ -14,7 +14,7 @@ define('APP_NAME',      'ONEGEM');
 define('APP_VERSION',   '1.0.0');
 define('APP_LOCALE',    'id_ID');
 define('APP_TIMEZONE',  'Asia/Jakarta');
-define('APP_ENV',       'development'); // development | production
+define('APP_ENV',       'production'); // development | production
 
 // ─── Path ─────────────────────────────────────────────────────────────────────
 define('BASE_PATH',   dirname(__DIR__));
@@ -27,10 +27,7 @@ define('LOG_PATH',    BASE_PATH . '/logs');
 // Sesuaikan jika nama folder berbeda
 // $folder_projek = 'onegem';
 
-$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
-    ? 'https'
-    : 'http';
-
+$protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https' : 'http';
 $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
 
 // VPS / Domain langsung
@@ -40,7 +37,7 @@ define('BASE_FOLDER', '');
 // ─── Session ──────────────────────────────────────────────────────────────────
 define('SESSION_NAME',     'ERPSID');
 define('SESSION_LIFETIME', 28800);   // 8 jam
-define('SESSION_SECURE',   false);   // false untuk localhost (non-HTTPS)
+define('SESSION_SECURE',   true);   // false untuk localhost (non-HTTPS)
 // Start Session
 session_name(SESSION_NAME);
 
