@@ -24,13 +24,19 @@ define('LOG_PATH',    BASE_PATH . '/logs');
 
 // ─── URL ──────────────────────────────────────────────────────────────────────
 // Nama folder project Anda di dalam www/ Laragon
-// Sesuaikan jika nama folder berbeda
-$folder_projek = 'onegem';
+$host = $_SERVER['HTTP_HOST'] ?? 'localhost';
 
-$protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https' : 'http';
-$host     = $_SERVER['HTTP_HOST'] ?? 'localhost';
-define('BASE_URL',    $protocol . '://' . $host . '/' . $folder_projek);
-define('BASE_FOLDER', '/' . $folder_projek); // dipakai untuk routing
+if ($host === 'localhost') {
+
+    define('BASE_URL', 'http://localhost/onegem');
+    define('BASE_FOLDER', '/onegem');
+
+} else {
+
+    define('BASE_URL', 'https://onegem.tmi-sqa.my.id');
+    define('BASE_FOLDER', '');
+
+}
 
 // ─── Session ──────────────────────────────────────────────────────────────────
 define('SESSION_NAME',     'ERPSID');
