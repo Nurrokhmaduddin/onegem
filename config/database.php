@@ -12,7 +12,7 @@ declare(strict_types=1);
 // ─── Konfigurasi koneksi ──────────────────────────────────────────────────────
 // Laragon default: root tanpa password
 // Ganti sesuai environment Anda jika berbeda
-define('DB_HOST',    '127.0.0.1');
+define('DB_HOST',    '103.41.206.251');
 define('DB_PORT',    '3306');
 define('DB_NAME',    'erp_berlian');
 define('DB_USER',    'root');
