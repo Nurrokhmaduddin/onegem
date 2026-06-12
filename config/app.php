@@ -29,7 +29,7 @@ define('LOG_PATH',    BASE_PATH . '/logs');
 
 $protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https' : 'http';
 $host     = $_SERVER['HTTP_HOST'] ?? 'localhost';
-define('BASE_URL',    $protocol . '://' . $host . '/' );
+define('BASE_URL',    $protocol . '://' . $host );
 define('BASE_FOLDER', '/' . $folder_projek); // dipakai untuk routing
 
 // ─── Session ──────────────────────────────────────────────────────────────────
