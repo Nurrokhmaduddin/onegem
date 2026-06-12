@@ -34,7 +34,7 @@ if ($_SERVER['HTTP_HOST'] === 'localhost') {
 
 } else {
 
-    define('BASE_URL', 'https://onegem.tmi-sqa.my.id');
+    define('BASE_URL', 'https://onegem.tmidev.my.id');
     define('BASE_FOLDER', '');
 
 }
