@@ -1,5 +1,5 @@
 <?php
-
+// die('INDEX FRONT CONTROLLER WORKING');
 /**
  * index.php — Front Controller
  * Hybrid routing: terima semua request, dispatch ke modul yang sesuai
@@ -50,6 +50,11 @@ if ($path !== '/' && str_ends_with($path, '/')) {
 if ($path === '/') {
     redirect(url('auth/login'));
 }
+echo '<pre>';
+echo 'REQUEST_URI = ' . $_SERVER['REQUEST_URI'] . PHP_EOL;
+echo 'BASE_FOLDER = ' . BASE_FOLDER . PHP_EOL;
+echo 'PATH = ' . $path . PHP_EOL;
+exit;
 // ─── Route map ────────────────────────────────────────────────────────────────
 $routes = [
     // Auth
