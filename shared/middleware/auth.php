@@ -30,11 +30,7 @@ function require_auth(): void
             AND s.user_id = ?",
         [$_SESSION['session_token'] ?? '', $_SESSION['user_id']]
     );
-echo '<pre>';
-print_r($_SESSION);
-echo "\n\n";
-print_r($session);
-exit;
+
     if (!$session) {
         session_destroy();
         redirect(url('auth/login') . '?reason=session_invalid');
@@ -49,7 +45,12 @@ exit;
         redirect(url('auth/login') . '?reason=session_expired');
     }
 
-    if (!$session['is_active']) {
+    if ((int)$session['session_active'] !== 1) {
+        session_destroy();
+        redirect(url('auth/login') . '?reason=session_invalid');
+    }
+
+    if ((int)$session['user_active'] !== 1) {
         session_destroy();
         redirect(url('auth/login') . '?reason=account_inactive');
     }
