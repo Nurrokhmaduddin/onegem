@@ -1,5 +1,5 @@
 <?php
-die('INDEX FRONT CONTROLLER WORKING');
+
 /**
  * index.php — Front Controller
  * Hybrid routing: terima semua request, dispatch ke modul yang sesuai
