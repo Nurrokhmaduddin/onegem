@@ -9,15 +9,15 @@ declare(strict_types=1);
 
 function require_auth(): void
 {
-    echo '<pre>';
+    // echo '<pre>';
 
-    echo "SESSION:\n";
-    print_r($_SESSION);
+    // echo "SESSION:\n";
+    // print_r($_SESSION);
 
-    echo "\nTOKEN:\n";
-    var_dump($_SESSION['session_token'] ?? null);
+    // echo "\nTOKEN:\n";
+    // var_dump($_SESSION['session_token'] ?? null);
 
-    die('AUTH DEBUG');
+    // die('AUTH DEBUG');
 
     
     if (empty($_SESSION['user_id'])) {
