@@ -9,6 +9,17 @@ declare(strict_types=1);
 
 function require_auth(): void
 {
+    echo '<pre>';
+
+    echo "SESSION:\n";
+    print_r($_SESSION);
+
+    echo "\nTOKEN:\n";
+    var_dump($_SESSION['session_token'] ?? null);
+
+    die('AUTH DEBUG');
+
+    
     if (empty($_SESSION['user_id'])) {
         flash_set('error', 'Sesi Anda telah berakhir. Silakan login kembali.');
         redirect(url('auth/login/'));
@@ -16,7 +27,12 @@ function require_auth(): void
 
     // Validasi sesi aktif di database
     $session = Database::fetchOne(
-        "SELECT s.id, s.expires_at, u.is_active,s.is_active, u.role_id
+        "SELECT
+    s.id,
+    s.expires_at,
+    s.is_active AS session_active,
+    u.is_active AS user_active,
+    u.role_id
            FROM user_sessions s
            JOIN users u ON u.id = s.user_id
           WHERE s.session_token = ?

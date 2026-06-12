@@ -60,7 +60,9 @@ if (is_post()) {
                 AND u.deleted_at IS NULL",
             [$username, $username]
         );
-
+echo '<pre>';
+var_dump($user);
+exit;
         // Akun terkunci?
         if ($user && $user['locked_until'] && strtotime($user['locked_until']) > time()) {
             $remainMin = (int) ceil((strtotime($user['locked_until']) - time()) / 60);
