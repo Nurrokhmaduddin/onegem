@@ -16,15 +16,15 @@ require_once __DIR__ . '/../shared/helper/functions.php';
 require_once __DIR__ . '/../shared/middleware/audit.php';
 
 // Session init — WAJIB sebelum akses $_SESSION
-// session_name(SESSION_NAME);
-// session_set_cookie_params([
-//     'lifetime' => SESSION_LIFETIME,
-//     'path'     => '/',
-//     'secure'   => SESSION_SECURE,
-//     'httponly' => true,
-//     'samesite' => 'Lax',
-// ]);
-// session_start();
+session_name(SESSION_NAME);
+session_set_cookie_params([
+    'lifetime' => SESSION_LIFETIME,
+    'path'     => '/',
+    'secure'   => SESSION_SECURE,
+    'httponly' => true,
+    'samesite' => 'Lax',
+]);
+session_start();
 
 // Sudah login? redirect ke dashboard
 if (!empty($_SESSION['user_id'])) {
