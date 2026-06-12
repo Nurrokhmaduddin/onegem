@@ -9,11 +9,7 @@ declare(strict_types=1);
 
 function require_auth(): void
 {
-echo '<pre>';
-print_r($session);
-exit;
 
-    
     if (empty($_SESSION['user_id'])) {
         flash_set('error', 'Sesi Anda telah berakhir. Silakan login kembali.');
         redirect(url('auth/login/'));
@@ -34,7 +30,11 @@ exit;
             AND s.user_id = ?",
         [$_SESSION['session_token'] ?? '', $_SESSION['user_id']]
     );
-
+echo '<pre>';
+print_r($_SESSION);
+echo "\n\n";
+print_r($session);
+exit;
     if (!$session) {
         session_destroy();
         redirect(url('auth/login') . '?reason=session_invalid');
