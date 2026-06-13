@@ -48,12 +48,25 @@ require_once __DIR__ . '/../layout/header.php';
 ?>
 <!-- Stat cards master data -->
 <?php
+$currency = Database::fetchOne("
+    SELECT rate_to_idr
+    FROM currencies
+    WHERE code = 'USD'
+      AND is_active = 1
+      AND effective_date <= CURDATE()
+    ORDER BY effective_date DESC
+    LIMIT 1
+");
 $mdStats = [
     'customers' => Database::fetchOne("SELECT COUNT(*) n FROM customers WHERE deleted_at IS NULL AND is_active=1")['n']??0,
     'suppliers' => Database::fetchOne("SELECT COUNT(*) n FROM suppliers WHERE deleted_at IS NULL AND is_active=1")['n']??0,
     'diamonds'  => Database::fetchOne("SELECT COUNT(*) n FROM diamonds WHERE deleted_at IS NULL AND status='available'")['n']??0,
-    'rate'      => Database::fetchOne("SELECT rate_to_idr FROM currencies WHERE code='USD' AND is_active=1 AND effective_date<=CURDATE() ORDER BY effective_date DESC LIMIT 1")['rate_to_idr']??0,
+    // 'rate'      => (float) Database::fetchOne("SELECT rate_to_idr FROM currencies WHERE code='USD' AND is_active=1 AND effective_date<=CURDATE() ORDER BY effective_date DESC LIMIT 1")['rate_to_idr']??0,
+    'rate'      => (float)($currency['rate_to_idr'] ?? 0),
 ];
+// echo '<pre>';
+// var_dump($currency);
+// exit;
 ?>
 <!-- Greeting -->
 <div class="mb-4">
@@ -110,7 +123,7 @@ $mdStats = [
       </div>
     </div>
   </div>
-    <div class="col-6 col-md-4 col-lg-2-4">
+  <!-- <div class="col-6 col-md-4 col-lg-2-4">
     <div class="stat-card">
       <div class="stat-icon blue"><i class="bi bi-gem"></i></div>
       <div>
@@ -118,11 +131,11 @@ $mdStats = [
         <div class="stat-value"><?= e($mdStats['diamonds']) ?></div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
 
 <!-- Sprint info banner -->
-<!-- <div class="alert alert-success border-0 mb-4" style="background:#F0FDF4">
+<div class="alert alert-success border-0 mb-4" style="background:#F0FDF4">
   <div class="d-flex align-items-start gap-3">
     <i class="bi bi-check-circle-fill fs-4 text-success flex-shrink-0"></i>
     <div>
@@ -132,10 +145,10 @@ $mdStats = [
       </div>
     </div>
   </div>
-</div> -->
+</div>
 
 
-<!-- <div class="row g-3 mb-4">
+<div class="row g-3 mb-4">
   <div class="col-6 col-md-3">
     <a href="<?= url('master/customer') ?>" class="text-decoration-none">
       <div class="stat-card">
@@ -153,8 +166,8 @@ $mdStats = [
         <div class="stat-value" style="color:#15803D"><?= e($mdStats['suppliers']) ?></div></div>
       </div>
     </a>
-  </div> -->
-<!--   <div class="col-6 col-md-3">
+  </div>
+  <div class="col-6 col-md-3">
     <a href="<?= url('master/diamond') ?>?status=available" class="text-decoration-none">
       <div class="stat-card">
         <div class="stat-icon blue"><i class="bi bi-gem"></i></div>
@@ -162,18 +175,19 @@ $mdStats = [
         <div class="stat-value"><?= e($mdStats['diamonds']) ?></div></div>
       </div>
     </a>
-  </div> -->
-  <!-- <div class="col-6 col-md-3">
+  </div>
+  <div class="col-6 col-md-3">
     <a href="<?= url('master/currency') ?>" class="text-decoration-none">
       <div class="stat-card">
         <div class="stat-icon" style="background:#EFF6FF;color:#1D4ED8"><i class="bi bi-currency-exchange"></i></div>
         <div><div class="stat-label">Kurs USD</div>
         <div class="stat-value" style="font-size:15px">
           <?= $mdStats['rate'] ? 'Rp '.number_format($mdStats['rate'],0,',','.') : '—' ?>
+         
         </div></div>
       </div>
     </a>
-  </div> -->
+  </div>
 </div>
 
 <!-- Row: aktivitas + user baru -->
