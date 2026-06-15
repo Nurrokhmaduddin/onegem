@@ -38,7 +38,7 @@ $statusConfig = [
 ];
 
 $counts = [];
-foreach (array_merge(array_keys($statusConfig), ['converted', 'lost']) as $s) {
+foreach (array_keys($statusConfig) + ['converted','lost'] as $s) {
     $row = Database::fetchOne(
         "SELECT COUNT(*) AS n FROM leads WHERE status = ? AND deleted_at IS NULL", [$s]
     );
@@ -56,8 +56,8 @@ require_once __DIR__ . '/../../layout/header.php';
     <h5 class="mb-0 fw-700"><i class="bi bi-kanban me-2 text-primary"></i>Pipeline Lead</h5>
     <div class="text-muted small mt-1">
       Total aktif: <strong><?= array_sum(array_intersect_key($counts, $statusConfig)) ?></strong> lead
-      &nbsp;·&nbsp; Konversi: <strong><?= $counts['converted'] ?? 0 ?></strong>
-      &nbsp;·&nbsp; Tidak jadi: <strong><?= $counts['lost'] ?? 0 ?></strong>
+      &nbsp;·&nbsp; Konversi: <strong><?= $counts['converted'] ?></strong>
+      &nbsp;·&nbsp; Tidak jadi: <strong><?= $counts['lost'] ?></strong>
     </div>
   </div>
   <div class="d-flex gap-2">
