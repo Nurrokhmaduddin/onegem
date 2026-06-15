@@ -30,6 +30,10 @@ if (str_starts_with($currentPath, BASE_FOLDER)) {
     $activePath = $currentPath;
 }
 $activePath = '/' . ltrim($activePath, '/');
+// Hilangkan trailing slash agar konsisten (kecuali root)
+if ($activePath !== '/') {
+    $activePath = rtrim($activePath, '/');
+}
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -199,12 +203,108 @@ $activePath = '/' . ltrim($activePath, '/');
       <?php endif; ?>
 
       <div class="nav-section-label">Penjualan</div>
-      <a href="#" class="nav-link disabled" title="Tersedia Sprint 3">
-        <i class="bi bi-file-earmark-text"></i><span>Quotation</span>
-      </a>
-      <a href="#" class="nav-link disabled" title="Tersedia Sprint 3">
-        <i class="bi bi-lock"></i><span>Reservasi</span>
-      </a>
+
+      <?php if (can('LEAD_VIEW')): ?>
+      <div class="nav-group <?= str_starts_with($activePath,'/sales/lead')?'open':'' ?>">
+        <button class="nav-link nav-group-toggle w-100 text-start border-0 bg-transparent"
+                data-bs-toggle="collapse" data-bs-target="#navLead">
+          <i class="bi bi-person-lines-fill"></i><span>Lead</span>
+          <i class="bi bi-chevron-down nav-chevron ms-auto"></i>
+        </button>
+        <div class="collapse nav-group-items <?= str_starts_with($activePath,'/sales/lead')?'show':'' ?>" id="navLead">
+          <a href="<?= url('sales/lead') ?>"
+             class="nav-link <?= in_array($activePath,['/sales/lead','/sales/lead/index'])?'active':'' ?>">
+            <i class="bi bi-kanban"></i>Pipeline
+          </a>
+          <a href="<?= url('sales/lead/list') ?>"
+             class="nav-link <?= $activePath==='/sales/lead/list'?'active':'' ?>">
+            <i class="bi bi-list-ul"></i>Semua Lead
+          </a>
+          <?php if (can('LEAD_CREATE')): ?>
+          <a href="<?= url('sales/lead/create') ?>"
+             class="nav-link <?= str_starts_with($activePath,'/sales/lead/create')?'active':'' ?>">
+            <i class="bi bi-plus-circle"></i>Buat Lead
+          </a>
+          <?php endif; ?>
+        </div>
+      </div>
+      <?php endif; ?>
+
+      <?php if (can('QUOTATION_VIEW')): ?>
+      <!-- Quotation collapsible -->
+      <div class="nav-group <?= str_starts_with($activePath,'/sales/quotation')?'open':'' ?>">
+        <button class="nav-link nav-group-toggle w-100 text-start border-0 bg-transparent"
+                data-bs-toggle="collapse" data-bs-target="#navQuotation">
+          <i class="bi bi-file-earmark-text"></i><span>Quotation</span>
+          <i class="bi bi-chevron-down nav-chevron ms-auto"></i>
+        </button>
+        <div class="collapse nav-group-items <?= str_starts_with($activePath,'/sales/quotation')?'show':'' ?>" id="navQuotation">
+          <a href="<?= url('sales/quotation/list') ?>"
+             class="nav-link <?= $activePath==='/sales/quotation/list'?'active':'' ?>">
+            <i class="bi bi-list-ul"></i>Semua Quotation
+          </a>
+          <?php if (can('QUOTATION_CREATE')): ?>
+          <a href="<?= url('sales/quotation/create') ?>"
+             class="nav-link <?= str_starts_with($activePath,'/sales/quotation/create')?'active':'' ?>">
+            <i class="bi bi-plus-circle"></i>Buat Quotation
+          </a>
+          <?php endif; ?>
+          <?php if (can('QUOTATION_APPROVE')): ?>
+          <a href="<?= url('sales/quotation/list') ?>?status=submitted"
+             class="nav-link">
+            <i class="bi bi-clock-history"></i>Menunggu Approval
+            <?php
+              try {
+                $pendingQ = Database::fetchOne(
+                  "SELECT COUNT(*) AS n FROM quotations WHERE status='submitted' AND deleted_at IS NULL"
+                );
+              } catch (Throwable $e) { $pendingQ = ['n' => 0]; }
+              if (($pendingQ['n'] ?? 0) > 0):
+            ?>
+            <span class="badge bg-warning text-dark ms-auto"><?= $pendingQ['n'] ?></span>
+            <?php endif; ?>
+          </a>
+          <?php endif; ?>
+        </div>
+      </div>
+      <?php endif; ?>
+
+      <?php if (can('RESERVATION_VIEW')): ?>
+      <!-- Reservation collapsible -->
+      <div class="nav-group <?= str_starts_with($activePath,'/sales/reservation')?'open':'' ?>">
+        <button class="nav-link nav-group-toggle w-100 text-start border-0 bg-transparent"
+                data-bs-toggle="collapse" data-bs-target="#navReservation">
+          <i class="bi bi-bookmark-check"></i><span>Reservasi</span>
+          <?php
+            try {
+              $activeRsv = Database::fetchOne(
+                "SELECT COUNT(*) AS n FROM reservations WHERE status='active' AND deleted_at IS NULL"
+              );
+            } catch (Throwable $e) { $activeRsv = ['n' => 0]; }
+            if (($activeRsv['n'] ?? 0) > 0):
+          ?>
+          <span class="badge bg-success ms-auto me-1"><?= $activeRsv['n'] ?></span>
+          <?php endif; ?>
+          <i class="bi bi-chevron-down nav-chevron <?= ($activeRsv['n'] ?? 0) > 0 ? '' : 'ms-auto' ?>"></i>
+        </button>
+        <div class="collapse nav-group-items <?= str_starts_with($activePath,'/sales/reservation')?'show':'' ?>" id="navReservation">
+          <a href="<?= url('sales/reservation') ?>"
+             class="nav-link <?= $activePath==='/sales/reservation/index'||$activePath==='/sales/reservation'?'active':'' ?>">
+            <i class="bi bi-bookmark-check-fill"></i>Reservasi Aktif
+          </a>
+          <a href="<?= url('sales/reservation/list') ?>"
+             class="nav-link <?= $activePath==='/sales/reservation/list'?'active':'' ?>">
+            <i class="bi bi-list-ul"></i>Semua Reservasi
+          </a>
+          <?php if (can('RESERVATION_CREATE')): ?>
+          <a href="<?= url('sales/reservation/create') ?>"
+             class="nav-link <?= str_starts_with($activePath,'/sales/reservation/create')?'active':'' ?>">
+            <i class="bi bi-plus-circle"></i>Buat Reservasi
+          </a>
+          <?php endif; ?>
+        </div>
+      </div>
+      <?php endif; ?>
 
       <div class="nav-section-label">Operasional</div>
       <a href="#" class="nav-link disabled" title="Tersedia Sprint 5">

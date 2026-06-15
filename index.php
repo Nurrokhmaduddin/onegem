@@ -150,6 +150,60 @@ $routes = [
     '/master/currency'      => __DIR__ . '/master/currency/list.php',
     '/master/currency/save' => __DIR__ . '/master/currency/save.php',
 
+
+    // ── SPRINT 3: Sales Domain ─────────────────────────────────────────────
+
+    // Lead
+    '/sales/lead'                => __DIR__ . '/sales/lead/index.php',
+    '/sales/lead/list'           => __DIR__ . '/sales/lead/list.php',
+    '/sales/lead/create'         => __DIR__ . '/sales/lead/form.php',
+    '/sales/lead/edit'           => __DIR__ . '/sales/lead/form.php',
+    '/sales/lead/detail'         => __DIR__ . '/sales/lead/detail.php',
+    '/sales/lead/save'           => __DIR__ . '/sales/lead/save.php',
+    '/sales/lead/update'         => __DIR__ . '/sales/lead/update.php',
+    '/sales/lead/delete'         => __DIR__ . '/sales/lead/delete.php',
+    '/sales/lead/change-status'  => __DIR__ . '/sales/lead/change_status.php',
+    '/sales/lead/add-activity'   => __DIR__ . '/sales/lead/add_activity.php',
+    '/sales/lead/convert'        => __DIR__ . '/sales/lead/convert.php',
+
+    // Quotation
+    '/sales/quotation'                       => __DIR__ . '/sales/quotation/list.php',
+    '/sales/quotation/list'                  => __DIR__ . '/sales/quotation/list.php',
+    '/sales/quotation/create'                => __DIR__ . '/sales/quotation/form.php',
+    '/sales/quotation/edit'                  => __DIR__ . '/sales/quotation/form.php',
+    '/sales/quotation/detail'                => __DIR__ . '/sales/quotation/detail.php',
+    '/sales/quotation/save'                  => __DIR__ . '/sales/quotation/save.php',
+    '/sales/quotation/update'                => __DIR__ . '/sales/quotation/update.php',
+    '/sales/quotation/delete'                => __DIR__ . '/sales/quotation/delete.php',
+    '/sales/quotation/submit'                => __DIR__ . '/sales/quotation/submit.php',
+    '/sales/quotation/approve'               => __DIR__ . '/sales/quotation/approve.php',
+    '/sales/quotation/reject'                => __DIR__ . '/sales/quotation/reject.php',
+    '/sales/quotation/accept'                => __DIR__ . '/sales/quotation/accept.php',
+    '/sales/quotation/cancel'                => __DIR__ . '/sales/quotation/cancel.php',
+    '/sales/quotation/convert-to-reservation'=> __DIR__ . '/sales/quotation/convert_to_reservation.php',
+
+    // Quotation AJAX
+    '/ajax/quotation/search-diamond' => __DIR__ . '/sales/quotation/ajax/search_diamond.php',
+    '/ajax/quotation/add-item'       => __DIR__ . '/sales/quotation/ajax/add_item.php',
+    '/ajax/quotation/remove-item'    => __DIR__ . '/sales/quotation/ajax/remove_item.php',
+
+    // Reservation
+    '/sales/reservation'          => __DIR__ . '/sales/reservation/index.php',
+    '/sales/reservation/list'     => __DIR__ . '/sales/reservation/list.php',
+    '/sales/reservation/create'   => __DIR__ . '/sales/reservation/form.php',
+    '/sales/reservation/edit'     => __DIR__ . '/sales/reservation/edit.php',
+    '/sales/reservation/detail'   => __DIR__ . '/sales/reservation/detail.php',
+    '/sales/reservation/save'     => __DIR__ . '/sales/reservation/save.php',
+    '/sales/reservation/update'   => __DIR__ . '/sales/reservation/update.php',
+    '/sales/reservation/release'  => __DIR__ . '/sales/reservation/release.php',
+    '/sales/reservation/extend'   => __DIR__ . '/sales/reservation/extend.php',
+    '/sales/reservation/convert'  => __DIR__ . '/sales/reservation/convert.php',
+
+
+    // AJAX — Sprint 3 aliases (dipakai di form quotation & lead)
+    '/ajax/diamond/search'       => __DIR__ . '/sales/quotation/ajax/search_diamond.php',
+    '/ajax/lead/search'          => __DIR__ . '/sales/lead/ajax/search.php',
+
     // AJAX — Sprint 2
     '/ajax/customer/search'  => __DIR__ . '/master/customer/ajax/search.php',
     '/ajax/supplier/search'  => __DIR__ . '/master/supplier/ajax/search.php',

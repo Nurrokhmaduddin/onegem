@@ -260,3 +260,88 @@ body.sidebar-collapsed .erp-main { margin-left: 56px; }
   body.sidebar-open .erp-sidebar { transform: translateX(0); }
   .erp-main { margin-left: 0 !important; }
 }
+
+/* ── Sprint 3: Nav Group (Collapsible Sidebar Menu) ─────────────────────────── */
+
+/* Wrapper grup menu collapsible */
+.nav-group { display: flex; flex-direction: column; }
+
+/* Tombol toggle — sama styling dengan nav-link biasa */
+.nav-group-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 7px;
+  color: rgba(255,255,255,.82);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background .15s, color .15s;
+  cursor: pointer;
+  line-height: 1.4;
+}
+.nav-group-toggle:hover,
+.nav-group.open > .nav-group-toggle {
+  background: var(--erp-sidebar-hover);
+  color: #fff;
+}
+.nav-group-toggle i:first-child { font-size: 17px; flex-shrink: 0; }
+
+/* Ikon chevron rotasi saat terbuka */
+.nav-chevron {
+  font-size: 11px !important;
+  transition: transform .2s ease;
+  flex-shrink: 0;
+}
+.nav-group.open > .nav-group-toggle .nav-chevron,
+.nav-group-toggle[aria-expanded="true"] .nav-chevron {
+  transform: rotate(180deg);
+}
+
+/* Area sub-menu */
+.nav-group-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 2px 0 4px 0;
+}
+
+/* Link sub-menu */
+.nav-sub-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px 7px 36px;
+  border-radius: 6px;
+  color: rgba(255,255,255,.65);
+  font-size: 13px;
+  font-weight: 400;
+  text-decoration: none;
+  transition: background .15s, color .15s;
+  line-height: 1.4;
+}
+.nav-sub-link i { font-size: 14px; flex-shrink: 0; }
+.nav-sub-link:hover {
+  background: var(--erp-sidebar-hover);
+  color: #fff;
+}
+.nav-sub-link.active {
+  background: rgba(255,255,255,.15);
+  color: #fff;
+  font-weight: 500;
+}
+
+/* Badge dalam sub-link */
+.nav-sub-link .badge { font-size: 10px; margin-left: auto; }
+
+/* Collapsed sidebar: sembunyikan sub-menu dan label */
+body.sidebar-collapsed .nav-group-items,
+body.sidebar-collapsed .nav-group-toggle span,
+body.sidebar-collapsed .nav-chevron { display: none; }
+body.sidebar-collapsed .nav-group-toggle { justify-content: center; padding: 10px; }
+
+/* ── Sprint 3: Timeline (detail reservasi/history) ───────────────────────────── */
+.timeline-dot {
+  width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+}

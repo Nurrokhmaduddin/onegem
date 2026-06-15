@@ -134,3 +134,19 @@ $(function () {
   });
 
 });
+
+  /* ── Sprint 3: Nav Group collapse sync ────────────────────────────────── */
+  // Saat collapse Bootstrap dibuka/tutup, sync class 'open' di .nav-group
+  $(document).on('show.bs.collapse', '.nav-group-items', function () {
+    $(this).closest('.nav-group').addClass('open');
+  });
+  $(document).on('hide.bs.collapse', '.nav-group-items', function () {
+    $(this).closest('.nav-group').removeClass('open');
+  });
+  // Rotate chevron via CSS sudah handle lewat class 'open', tapi backup via aria
+  $(document).on('click', '.nav-group-toggle', function () {
+    const chevron = $(this).find('.nav-chevron');
+    const isExpanded = $(this).attr('aria-expanded') === 'true';
+    chevron.css('transform', isExpanded ? '' : 'rotate(180deg)');
+  });
+

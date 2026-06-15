@@ -1,0 +1,6 @@
+<?php // sales/quotation/create.php — alias untuk form buat quotation baru
+declare(strict_types=1);
+require_once __DIR__ . '/../../config/app.php';
+require_once __DIR__ . '/../../shared/helper/functions.php';
+// form.php menangani semua logika + UI
+require __DIR__ . '/form.php';
