@@ -32,7 +32,7 @@ if (localStorage.getItem('sidebarCollapsed') === 'true' && window.innerWidth > 7
     $('body').addClass('sidebar-collapsed');
 } else {
     localStorage.removeItem('sidebarCollapsed');
-    $('body').addClass('sidebar-collapsed');
+    $('body').removeClass('sidebar-collapsed');
 }
   $(document).on('click', function (e) {
     if (window.innerWidth <= 768
