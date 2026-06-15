@@ -22,9 +22,18 @@ $(function () {
       localStorage.setItem('sidebarCollapsed', $('body').hasClass('sidebar-collapsed'));
     }
   });
-  if (localStorage.getItem('sidebarCollapsed') === 'true' && window.innerWidth > 768) {
+// SEBELUM
+// if (localStorage.getItem('sidebarCollapsed') === 'true' && window.innerWidth > 768) {
+//     $('body').addClass('sidebar-collapsed');
+// }
+
+// SESUDAH
+if (localStorage.getItem('sidebarCollapsed') === 'true' && window.innerWidth > 768) {
     $('body').addClass('sidebar-collapsed');
-  }
+} else {
+    localStorage.removeItem('sidebarCollapsed');
+    $('body').removeClass('sidebar-collapsed');
+}
   $(document).on('click', function (e) {
     if (window.innerWidth <= 768
       && !$(e.target).closest('#erpSidebar, #sidebarToggle').length) {
