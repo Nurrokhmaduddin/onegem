@@ -204,12 +204,11 @@ if ($activePath !== '/') {
 
       <div class="nav-section-label">Penjualan</div>
 
-        <!-- <?php if (can('LEAD_VIEW')): ?> -->
+
           <a href="<?= url('sales/lead/list') ?>"
             class="nav-link <?= $activePath==='/sales/lead/list'?'active':'' ?>">
             <i class="bi bi-list-ul"></i>Lead
           </a>
-        <!-- <?php endif; ?> -->
 
 
       <?php if (can('LEAD_VIEW')): ?>
