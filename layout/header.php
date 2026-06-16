@@ -203,14 +203,6 @@ if ($activePath !== '/') {
       <?php endif; ?>
 
       <div class="nav-section-label">Penjualan</div>
-
-
-          <a href="<?= url('sales/lead/list') ?>"
-            class="nav-link <?= $activePath==='/sales/lead/list'?'active':'' ?>">
-            <i class="bi bi-list-ul"></i>Lead
-          </a>
-
-
       <?php if (can('LEAD_VIEW')): ?>
       <div class="nav-group <?= str_starts_with($activePath,'/sales/lead')?'open':'' ?>">
         <button class="nav-link nav-group-toggle w-100 text-start border-0 bg-transparent"
