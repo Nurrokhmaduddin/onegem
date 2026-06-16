@@ -152,8 +152,8 @@ require_once __DIR__ . '/../../layout/header.php';
         <div class="col-md-6">
           <div class="detail-label">Customer</div>
           <div class="detail-value fw-600"><?= e($reservation['customer_name'] ?? '—') ?></div>
-          <?php if ($reservation['customer_no']): ?>
-          <div class="small text-muted"><?= e($reservation['customer_no']) ?></div>
+          <?php if ($reservation['customer_code']): ?>
+          <div class="small text-muted"><?= e($reservation['customer_code']) ?></div>
           <?php endif; ?>
         </div>
         <div class="col-md-6">

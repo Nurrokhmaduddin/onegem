@@ -31,7 +31,7 @@ class ReservationRepository
         return Database::fetchOne(
             "SELECT r.*,
                     c.name            AS customer_name,
-                    c.customer_no     AS customer_no,
+                    c.customer_code     AS customer_code,
                     c.phone           AS customer_phone,
                     q.quotation_no,
                     CONCAT(u.full_name) AS salesperson_name,

@@ -204,6 +204,14 @@ if ($activePath !== '/') {
 
       <div class="nav-section-label">Penjualan</div>
 
+        <?php if (can('LEAD_VIEW')): ?>
+          <a href="<?= url('sales/lead/list') ?>"
+            class="nav-link <?= $activePath==='/sales/lead/list'?'active':'' ?>">
+            <i class="bi bi-list-ul"></i>Lead
+          </a>
+        <?php endif; ?>
+
+
       <?php if (can('LEAD_VIEW')): ?>
       <div class="nav-group <?= str_starts_with($activePath,'/sales/lead')?'open':'' ?>">
         <button class="nav-link nav-group-toggle w-100 text-start border-0 bg-transparent"
@@ -213,16 +221,16 @@ if ($activePath !== '/') {
         </button>
         <div class="collapse nav-group-items <?= str_starts_with($activePath,'/sales/lead')?'show':'' ?>" id="navLead">
           <a href="<?= url('sales/lead') ?>"
-             class="nav-link <?= in_array($activePath,['/sales/lead','/sales/lead/index'])?'active':'' ?>">
+             style="padding-left:2.5rem" class="nav-link <?= in_array($activePath,['/sales/lead','/sales/lead/index'])?'active':'' ?>">
             <i class="bi bi-kanban"></i>Pipeline
           </a>
           <a href="<?= url('sales/lead/list') ?>"
-             class="nav-link <?= $activePath==='/sales/lead/list'?'active':'' ?>">
+             style="padding-left:2.5rem" class="nav-link <?= $activePath==='/sales/lead/list'?'active':'' ?>">
             <i class="bi bi-list-ul"></i>Semua Lead
           </a>
           <?php if (can('LEAD_CREATE')): ?>
           <a href="<?= url('sales/lead/create') ?>"
-             class="nav-link <?= str_starts_with($activePath,'/sales/lead/create')?'active':'' ?>">
+             style="padding-left:2.5rem" class="nav-link <?= str_starts_with($activePath,'/sales/lead/create')?'active':'' ?>">
             <i class="bi bi-plus-circle"></i>Buat Lead
           </a>
           <?php endif; ?>
@@ -240,18 +248,18 @@ if ($activePath !== '/') {
         </button>
         <div class="collapse nav-group-items <?= str_starts_with($activePath,'/sales/quotation')?'show':'' ?>" id="navQuotation">
           <a href="<?= url('sales/quotation/list') ?>"
-             class="nav-link <?= $activePath==='/sales/quotation/list'?'active':'' ?>">
+             style="padding-left:2.5rem" class="nav-link <?= $activePath==='/sales/quotation/list'?'active':'' ?>">
             <i class="bi bi-list-ul"></i>Semua Quotation
           </a>
           <?php if (can('QUOTATION_CREATE')): ?>
           <a href="<?= url('sales/quotation/create') ?>"
-             class="nav-link <?= str_starts_with($activePath,'/sales/quotation/create')?'active':'' ?>">
+             style="padding-left:2.5rem" class="nav-link <?= str_starts_with($activePath,'/sales/quotation/create')?'active':'' ?>">
             <i class="bi bi-plus-circle"></i>Buat Quotation
           </a>
           <?php endif; ?>
           <?php if (can('QUOTATION_APPROVE')): ?>
           <a href="<?= url('sales/quotation/list') ?>?status=submitted"
-             class="nav-link">
+             style="padding-left:2.5rem" class="nav-link">
             <i class="bi bi-clock-history"></i>Menunggu Approval
             <?php
               try {
@@ -289,17 +297,62 @@ if ($activePath !== '/') {
         </button>
         <div class="collapse nav-group-items <?= str_starts_with($activePath,'/sales/reservation')?'show':'' ?>" id="navReservation">
           <a href="<?= url('sales/reservation') ?>"
-             class="nav-link <?= $activePath==='/sales/reservation/index'||$activePath==='/sales/reservation'?'active':'' ?>">
+             style="padding-left:2.5rem" class="nav-link <?= $activePath==='/sales/reservation/index'||$activePath==='/sales/reservation'?'active':'' ?>">
             <i class="bi bi-bookmark-check-fill"></i>Reservasi Aktif
           </a>
           <a href="<?= url('sales/reservation/list') ?>"
-             class="nav-link <?= $activePath==='/sales/reservation/list'?'active':'' ?>">
+             style="padding-left:2.5rem" class="nav-link <?= $activePath==='/sales/reservation/list'?'active':'' ?>">
             <i class="bi bi-list-ul"></i>Semua Reservasi
           </a>
           <?php if (can('RESERVATION_CREATE')): ?>
           <a href="<?= url('sales/reservation/create') ?>"
-             class="nav-link <?= str_starts_with($activePath,'/sales/reservation/create')?'active':'' ?>">
+             style="padding-left:2.5rem" class="nav-link <?= str_starts_with($activePath,'/sales/reservation/create')?'active':'' ?>">
             <i class="bi bi-plus-circle"></i>Buat Reservasi
+          </a>
+          <?php endif; ?>
+        </div>
+      </div>
+      <?php endif; ?>
+
+      <!-- Sales Order -->
+      <?php if (can('SO_VIEW')): ?>
+      <div class="nav-group <?= str_starts_with($activePath,'/sales/so')?'open':'' ?>">
+        <button class="nav-link nav-group-toggle w-100 text-start border-0 bg-transparent"
+                data-bs-toggle="collapse" data-bs-target="#navSO">
+          <i class="bi bi-file-earmark-check"></i><span>Sales Order</span>
+          <?php
+            try {
+              $pendingSO = Database::fetchOne(
+                "SELECT COUNT(*) AS n FROM sales_orders WHERE status='submitted' AND deleted_at IS NULL"
+              );
+            } catch (Throwable $e) { $pendingSO = ['n'=>0]; }
+            if (($pendingSO['n'] ?? 0) > 0):
+          ?>
+          <span class="badge bg-warning text-dark ms-auto me-1"><?= $pendingSO['n'] ?></span>
+          <?php endif; ?>
+          <i class="bi bi-chevron-down nav-chevron <?= ($pendingSO['n']??0)>0?'':'ms-auto' ?>"></i>
+        </button>
+        <div class="collapse nav-group-items <?= str_starts_with($activePath,'/sales/so')?'show':'' ?>" id="navSO">
+          <a href="<?= url('sales/so/list') ?>"
+             style="padding-left:2.5rem"
+             class="nav-link <?= $activePath==='/sales/so/list'?'active':'' ?>">
+            <i class="bi bi-list-ul"></i>Semua SO
+          </a>
+          <?php if (can('SO_APPROVE')): ?>
+          <a href="<?= url('sales/so/list') ?>?status=submitted"
+             style="padding-left:2.5rem"
+             class="nav-link">
+            <i class="bi bi-hourglass-split"></i>Menunggu Approval
+            <?php if (($pendingSO['n'] ?? 0) > 0): ?>
+            <span class="badge bg-warning text-dark ms-auto"><?= $pendingSO['n'] ?></span>
+            <?php endif; ?>
+          </a>
+          <?php endif; ?>
+          <?php if (can('SO_CREATE')): ?>
+          <a href="<?= url('sales/so/create') ?>"
+             style="padding-left:2.5rem"
+             class="nav-link <?= str_starts_with($activePath,'/sales/so/create')?'active':'' ?>">
+            <i class="bi bi-plus-circle"></i>Buat SO
           </a>
           <?php endif; ?>
         </div>

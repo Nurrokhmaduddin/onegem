@@ -21,7 +21,7 @@ unset($_SESSION['form_errors'], $_SESSION['form_data']);
 // Pre-fill dari customer_id
 $preCustomerId = (int) get_param('customer_id', 0);
 $preCustomer   = $preCustomerId
-    ? Database::fetchOne("SELECT id, name, customer_no FROM customers WHERE id = ? AND deleted_at IS NULL", [$preCustomerId])
+    ? Database::fetchOne("SELECT id, name, customer_code FROM customers WHERE id = ? AND deleted_at IS NULL", [$preCustomerId])
     : null;
 
 // Ambil salesperson list
@@ -85,7 +85,7 @@ require_once __DIR__ . '/../../layout/header.php';
           <?php if ($preCustomer): ?>
           <div class="mt-1 small text-muted">
             <i class="bi bi-check-circle text-success me-1"></i>
-            <?= e($preCustomer['customer_no']) ?> — <?= e($preCustomer['name']) ?>
+            <?= e($preCustomer['customer_code']) ?> — <?= e($preCustomer['name']) ?>
           </div>
           <?php endif; ?>
         </div>
@@ -226,8 +226,8 @@ $extraJs = <<<'JS'
         }
         const html = res.data.map(c =>
           `<div class="px-3 py-2 customer-option" style="cursor:pointer;border-bottom:1px solid #f0f0f0"
-                data-id="${c.id}" data-name="${c.name}" data-no="${c.customer_no}">
-             <strong>${c.name}</strong> <span class="text-muted small">${c.customer_no}</span>
+                data-id="${c.id}" data-name="${c.name}" data-no="${c.customer_code}">
+             <strong>${c.name}</strong> <span class="text-muted small">${c.customer_code}</span>
            </div>`
         ).join('');
         $('#customerDropdown').html(html).show();

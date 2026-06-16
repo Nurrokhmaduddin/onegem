@@ -151,6 +151,26 @@ $routes = [
     '/master/currency/save' => __DIR__ . '/master/currency/save.php',
 
 
+
+    // ── SPRINT 4: Sales Order ──────────────────────────────────────────────
+    '/sales/so'              => __DIR__ . '/sales/so/index.php',
+    '/sales/so/list'         => __DIR__ . '/sales/so/list.php',
+    '/sales/so/create'       => __DIR__ . '/sales/so/form.php',
+    '/sales/so/edit'         => __DIR__ . '/sales/so/form.php',
+    '/sales/so/detail'       => __DIR__ . '/sales/so/detail.php',
+    '/sales/so/save'         => __DIR__ . '/sales/so/save.php',
+    '/sales/so/update'       => __DIR__ . '/sales/so/update.php',
+    '/sales/so/submit'       => __DIR__ . '/sales/so/submit.php',
+    '/sales/so/approve'      => __DIR__ . '/sales/so/approve.php',
+    '/sales/so/reject'       => __DIR__ . '/sales/so/reject.php',
+    '/sales/so/cancel'       => __DIR__ . '/sales/so/cancel.php',
+    '/sales/so/complete'     => __DIR__ . '/sales/so/complete.php',
+
+    // SO AJAX
+    '/ajax/so/search-diamond' => __DIR__ . '/sales/so/ajax/search_diamond.php',
+    '/ajax/so/add-item'       => __DIR__ . '/sales/so/ajax/add_item.php',
+    '/ajax/so/remove-item'    => __DIR__ . '/sales/so/ajax/remove_item.php',
+
     // ── SPRINT 3: Sales Domain ─────────────────────────────────────────────
 
     // Lead
